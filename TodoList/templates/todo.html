@@ -1,0 +1,28 @@
+<html>
+    <head>
+        <title>Todo List</title>
+    </head>
+    <body style="margin:0px; padding:0%;">
+        <div style="background-color: rgb(10,155,132,1); width: 100%; box-sizing: border-box; height: 60%; padding:1rem; color:white; text-align: center; font-size: 2rem;">
+            <h1 style="margin-top: 100px; font-family: fantasy, sans-serif;">Welcome to my first project with django </br>A simple "TODO LIST" </h1>
+        </div>
+        <div style="width: 100%; height: 30%; text-align: center; background-image:  rgba(255,0,0,0);
+         padding-top: 2rem;">
+            <ul style="list-style-type: none;">
+            {% for todo_item in all_items %}
+                <li style="background-color: rgb(228, 211, 189); margin-bottom: 1rem; border: 1px solid #444444; padding:1rem; font-size: 32px;">{{ todo_item.content }} 
+                    <form action="/deletetodo/{{todo_item.id}}/" style="display: inline;" method="POST">{% csrf_token %}
+                        <input type="submit" style="padding: 0.6rem; margin-left: 1.5rem; cursor: pointer;" value="X"/>
+                    </form>
+                </li>
+            {% endfor %}
+            </ul>
+
+            <form action="/addtodo/"  method="POST" style="padding: 6rem;">{% csrf_token %}
+                <input type="text" name="content" placeholder="Add your note" style="width: 50%; padding: 2rem; height: 3rem; border: 1px solid #555555; border-radius: 12px; font-size: 28px; color: darkslategrey; "/>
+                <input type="submit" value="add" style="width: 20%; height: 50px; margin-left: 3rem; border-radius: 12px; border: 2px solid rgb(35, 6, 65); font-size: 24px; cursor: pointer; color: bisque; background-color: rgba(187, 162, 212, 0.671);"/>
+                
+            </form>
+        </div>
+    </body>
+</html>
